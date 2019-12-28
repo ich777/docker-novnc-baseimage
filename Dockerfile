@@ -10,5 +10,6 @@ RUN apt-get update && \
 ENV CUSTOM_RES_W=640
 ENV CUSTOM_RES_H=480
 
+ADD /scripts/ /opt/scripts/
 COPY /x11vnc /usr/bin/x11vnc
 RUN chmod 751 /usr/bin/x11vnc
