@@ -1,0 +1,13 @@
+kind: pipeline
+name: novnc-baseimage
+
+steps:
+- name: docker
+  image: plugins/docker
+  settings:
+    dockerfile: Dockerfile
+    repo: ich777/novnc-baseimage
+    username: ich777
+    password:
+      from_secret: docker_password
+    tags: latest
