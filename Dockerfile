@@ -7,6 +7,21 @@ RUN apt-get update && \
 	sed -i '/    document.title =/c\    document.title = "noVNC";' /usr/share/novnc/app/ui.js && \
 	rm -rf /var/lib/apt/lists/*
 
+RUN cd /tmp && \
+	wget -O /tmp/novnc.tar.gz https://github.com/novnc/noVNC/archive/v1.2.0.tar.gz && \
+	tar -xvf /tmp/novnc.tar.gz && \
+	cd /tmp/noVNC* && \
+	rm -rf /usr/share/novnc/* && \
+	cp -r app /usr/share/novnc/ && \
+	cp -r core /usr/share/novnc/ && \
+	cp -r utils /usr/share/novnc/ && \
+	cp -r vendor /usr/share/novnc/ && \
+	cp -r vnc* /usr/share/novnc/ && \
+	cd /usr/share/novnc/ && \
+	ln -s vnc_lite.html vnc_auto.html && \
+	chmod -R 755 /usr/share/novnc/ && \
+	rm -rf /tmp/noVNC*
+
 ENV CUSTOM_RES_W=640
 ENV CUSTOM_RES_H=480
 
