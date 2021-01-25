@@ -19,7 +19,7 @@ RUN cd /tmp && \
 	rm -rf /tmp/noVNC*
 
 RUN apt-get update && \
-	apt-get -y install --no-install-recommends xvfb wmctrl x11vnc fluxbox screen libxcomposite-dev && \
+	apt-get -y install --no-install-recommends xvfb wmctrl x11vnc websockify fluxbox screen libxcomposite-dev && \
 	sed -i '/    document.title =/c\    document.title = "noVNC";' /usr/share/novnc/app/ui.js && \
 	rm -rf /var/lib/apt/lists/*
 
