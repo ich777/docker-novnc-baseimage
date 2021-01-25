@@ -11,7 +11,7 @@ RUN cd /tmp && \
 	wget -O /tmp/novnc.tar.gz https://github.com/novnc/noVNC/archive/v1.2.0.tar.gz && \
 	tar -xvf /tmp/novnc.tar.gz && \
 	cd /tmp/noVNC* && \
-	sed -i 's/credentials: { password: password } });/credentials: { password: password },\n                           wsProtocols: ["'"binary"'"] });/g' app/ui.js
+	sed -i 's/credentials: { password: password } });/credentials: { password: password },\n                           wsProtocols: ["'"binary"'"] });/g' app/ui.js && \
 	rm -rf /usr/share/novnc/* && \
 	cp -r app /usr/share/novnc/ && \
 	cp -r core /usr/share/novnc/ && \
