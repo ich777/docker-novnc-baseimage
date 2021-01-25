@@ -2,11 +2,6 @@ FROM ich777/debian-baseimage:bullseye
 
 LABEL maintainer="admin@minenet.at"
 
-RUN apt-get update && \
-	apt-get -y install --no-install-recommends xvfb wmctrl x11vnc fluxbox screen libxcomposite-dev && \
-	sed -i '/    document.title =/c\    document.title = "noVNC";' /usr/share/novnc/app/ui.js && \
-	rm -rf /var/lib/apt/lists/*
-
 RUN cd /tmp && \
 	wget -O /tmp/novnc.tar.gz https://github.com/novnc/noVNC/archive/v1.2.0.tar.gz && \
 	tar -xvf /tmp/novnc.tar.gz && \
@@ -22,6 +17,11 @@ RUN cd /tmp && \
 	cd /usr/share/novnc/ && \
 	chmod -R 755 /usr/share/novnc/ && \
 	rm -rf /tmp/noVNC*
+
+RUN apt-get update && \
+	apt-get -y install --no-install-recommends xvfb wmctrl x11vnc fluxbox screen libxcomposite-dev && \
+	sed -i '/    document.title =/c\    document.title = "noVNC";' /usr/share/novnc/app/ui.js && \
+	rm -rf /var/lib/apt/lists/*
 
 ENV CUSTOM_RES_W=640
 ENV CUSTOM_RES_H=480
