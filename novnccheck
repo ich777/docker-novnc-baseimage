@@ -1,0 +1,47 @@
+#Simple wrapper by ich777 for noVNC to set resizing, quality and compression.
+
+if [ -z "${NOVNC_RESIZE}" ]; then
+	if [ "$(grep "UI.initSetting('resize'," /usr/share/novnc/app/ui.js | cut -d "'" -f4)" == "off" ]; then
+		echo "Nothing to do, noVNC resizing set to default"
+	else
+		echo "noVNC resizing set to default"
+	        sed -i "/        UI.initSetting('resize',/c\        UI.initSetting('resize', 'off');" /usr/share/novnc/app/ui.js
+	fi
+elif [ "${NOVNC_RESIZE}" == "off" ] || [ "${NOVNC_RESIZE}" == "scale" ] || [ "${NOVNC_RESIZE}" == "remote" ]; then
+        echo "Setting noVNC resizing to: ${NOVNC_RESIZE}"
+        sed -i "/        UI.initSetting('resize',/c\        UI.initSetting('resize', '${NOVNC_RESIZE}');" /usr/share/novnc/app/ui.js
+else
+	echo "noVNC resize can only be 'off', 'resize' & 'remote'! Setting resize to default!"
+        sed -i "/        UI.initSetting('resize',/c\        UI.initSetting('resize', 'off');" /usr/share/novnc/app/ui.js
+fi
+
+if [ -z "${NOVNC_QUALITY}" ]; then
+        if [ "$(grep "UI.initSetting('quality'," /usr/share/novnc/app/ui.js | cut -d ' ' -f10 | cut -d ')' -f1)" == "6" ]; then
+                echo "Nothing to do, noVNC qaulity set to default"
+        else
+		echo "noVNC quality set to default"
+		sed -i "/        UI.initSetting('quality',/c\        UI.initSetting('quality', 6);" /usr/share/novnc/app/ui.js
+        fi
+elif [ -z "${NOVNC_QUALITY##[0-9]}" ]; then
+        echo "Setting noVNC quality to: ${NOVNC_QUALITY}"
+        sed -i "/        UI.initSetting('quality',/c\        UI.initSetting('quality', ${NOVNC_QUALITY});" /usr/share/novnc/app/ui.js
+else
+	echo "noVNC quality must be a integer between 0 and 9, setting quality to default!"
+        sed -i "/        UI.initSetting('quality',/c\        UI.initSetting('quality', 6);" /usr/share/novnc/app/ui.js
+fi
+
+if [ -z "${NOVNC_COMPRESSION}" ]; then
+        if [ "$(grep "UI.initSetting('compression'," /usr/share/novnc/app/ui.js | cut -d ' ' -f10 | cut -d ')' -f1)" == "2" ]; then
+                echo "Nothing to do, noVNC compression set to default"
+        else
+                echo "noVNC compression set to default"
+	        sed -i "/        UI.initSetting('compression',/c\        UI.initSetting('compression', 2);" /usr/share/novnc/app/ui.js
+        fi
+elif [ -z "${NOVNC_QUALITY##[0-9]}" ]; then
+        echo "Setting noVNC compression to: ${NOVNC_COMPRESSION}"
+        sed -i "/        UI.initSetting('compression',/c\        UI.initSetting('compression', ${NOVNC_COMPRESSION});" /usr/share/novnc/app/ui.js
+else
+	echo "noVNC compression must be a integer between 0 and 9, setting compression to default!"
+        sed -i "/        UI.initSetting('compression',/c\        UI.initSetting('compression', 2);" /usr/share/novnc/app/ui.js
+fi
+
