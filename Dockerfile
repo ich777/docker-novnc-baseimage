@@ -2,6 +2,9 @@ FROM ich777/debian-baseimage
 
 LABEL maintainer="admin@minenet.at"
 
+COPY novnccheck /usr/bin
+RUN chmod 755 /usr/bin/novnccheck
+
 RUN cd /tmp && \
 	wget -O /tmp/novnc.tar.gz https://github.com/novnc/noVNC/archive/v1.2.0.tar.gz && \
 	tar -xvf /tmp/novnc.tar.gz && \
