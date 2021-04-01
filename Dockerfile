@@ -26,6 +26,13 @@ RUN apt-get update && \
 	sed -i '/    document.title =/c\    document.title = "noVNC";' /usr/share/novnc/app/ui.js && \
 	rm -rf /var/lib/apt/lists/*
 
+RUN cd /tmp && \
+	wget -O /tmp/turbovnc.deb https://sourceforge.net/projects/turbovnc/files/2.2.6/turbovnc_2.2.6_amd64.deb/download && \
+	dpkg -i /tmp/turbovnc.deb && \
+	rm -rf /opt/TurboVNC/java /opt/TurboVNC/README.txt && \
+	cp -R /opt/TurboVNC/* / && \
+	rm -rf /opt/TurboVNC
+
 ENV CUSTOM_RES_W=640
 ENV CUSTOM_RES_H=480
 
