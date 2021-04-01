@@ -19,7 +19,7 @@ RUN cd /tmp && \
 	cp package.json /usr/share/novnc/ && \
 	cd /usr/share/novnc/ && \
 	chmod -R 755 /usr/share/novnc && \
-	rm -rf /tmp/noVNC*
+	rm -rf /tmp/noVNC* /tmp/novnc.tar.gz
 
 RUN apt-get update && \
 	apt-get -y install --no-install-recommends xvfb wmctrl x11vnc websockify fluxbox screen libxcomposite-dev libxcursor1 xauth && \
