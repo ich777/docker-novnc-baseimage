@@ -31,7 +31,7 @@ RUN cd /tmp && \
 	dpkg -i /tmp/turbovnc.deb && \
 	rm -rf /opt/TurboVNC/java /opt/TurboVNC/README.txt && \
 	cp -R /opt/TurboVNC/* / && \
-	rm -rf /opt/TurboVNC
+	rm -rf /opt/TurboVNC /tmp/turbovnc.deb
 
 ENV CUSTOM_RES_W=640
 ENV CUSTOM_RES_H=480
