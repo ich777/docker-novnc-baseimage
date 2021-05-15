@@ -31,7 +31,8 @@ RUN cd /tmp && \
 	dpkg -i /tmp/turbovnc.deb && \
 	rm -rf /opt/TurboVNC/java /opt/TurboVNC/README.txt && \
 	cp -R /opt/TurboVNC/* / && \
-	rm -rf /opt/TurboVNC /tmp/turbovnc.deb
+	rm -rf /opt/TurboVNC /tmp/turbovnc.deb && \
+	sed -i '/# $enableHTTP = 1;/c\$enableHTTP = 0;' /etc/turbovncserver.conf
 
 ENV CUSTOM_RES_W=640
 ENV CUSTOM_RES_H=480
