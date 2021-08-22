@@ -1,5 +1,4 @@
-ARG ARCH=arm64v8
-FROM ${ARCH}/ich777/debian-baseimage
+FROM ich777/debian-baseimage
 
 LABEL maintainer="admin@minenet.at"
 
