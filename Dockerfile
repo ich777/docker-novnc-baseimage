@@ -1,6 +1,7 @@
 FROM ich777/debian-baseimage:latest_armv7
 
-LABEL maintainer="admin@minenet.at"
+LABEL org.opencontainers.image.authors="admin@minenet.at"
+LABEL org.opencontainers.image.source="https://github.com/ich777/docker-novnc-baseimage"
 
 COPY novnccheck /usr/bin
 RUN chmod 755 /usr/bin/novnccheck
