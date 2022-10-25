@@ -3,11 +3,14 @@ FROM ich777/debian-baseimage
 LABEL org.opencontainers.image.authors="admin@minenet.at"
 LABEL org.opencontainers.image.source="https://github.com/ich777/docker-novnc-baseimage"
 
+ARG NOVNC_V=1.3.0
+ARG TURBOVNC_V=3.0
+
 COPY novnccheck /usr/bin
 RUN chmod 755 /usr/bin/novnccheck
 
 RUN cd /tmp && \
-	wget -O /tmp/novnc.tar.gz https://github.com/novnc/noVNC/archive/v1.3.0.tar.gz && \
+	wget -O /tmp/novnc.tar.gz https://github.com/novnc/noVNC/archive/v${NOVNC_V}.tar.gz && \
 	tar -xvf /tmp/novnc.tar.gz && \
 	cd /tmp/noVNC* && \
 	sed -i 's/credentials: { password: password } });/credentials: { password: password },\n                           wsProtocols: ["'"binary"'"] });/g' app/ui.js && \
@@ -28,7 +31,7 @@ RUN apt-get update && \
 	rm -rf /var/lib/apt/lists/*
 
 RUN cd /tmp && \
-	wget -O /tmp/turbovnc.deb https://sourceforge.net/projects/turbovnc/files/2.2.6/turbovnc_2.2.6_amd64.deb/download && \
+	wget -O /tmp/turbovnc.deb https://sourceforge.net/projects/turbovnc/files/${TURBOVNC_V}/turbovnc_${TURBOVNC_V}_amd64.deb/download && \
 	dpkg -i /tmp/turbovnc.deb && \
 	rm -rf /opt/TurboVNC/java /opt/TurboVNC/README.txt && \
 	cp -R /opt/TurboVNC/bin/* /bin/ && \
