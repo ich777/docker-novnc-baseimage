@@ -3,11 +3,13 @@ FROM ich777/debian-baseimage:latest_arm64
 LABEL org.opencontainers.image.authors="admin@minenet.at"
 LABEL org.opencontainers.image.source="https://github.com/ich777/docker-novnc-baseimage"
 
+ARG NOVNC_V=1.3.0
+
 COPY novnccheck /usr/bin
 RUN chmod 755 /usr/bin/novnccheck
 
 RUN cd /tmp && \
-	wget -O /tmp/novnc.tar.gz https://github.com/novnc/noVNC/archive/v1.2.0.tar.gz && \
+	wget -O /tmp/novnc.tar.gz https://github.com/novnc/noVNC/archive/v${NOVNC_V}.tar.gz && \
 	tar -xvf /tmp/novnc.tar.gz && \
 	cd /tmp/noVNC* && \
 	sed -i 's/credentials: { password: password } });/credentials: { password: password },\n                           wsProtocols: ["'"binary"'"] });/g' app/ui.js && \
