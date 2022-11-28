@@ -1,4 +1,4 @@
-FROM ich777/debian-baseimage
+FROM ich777/debian-baseimage:bookworm_amd64
 
 LABEL org.opencontainers.image.authors="admin@minenet.at"
 LABEL org.opencontainers.image.source="https://github.com/ich777/docker-novnc-baseimage"
