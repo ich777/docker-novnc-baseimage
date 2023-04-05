@@ -37,7 +37,7 @@ if [ -z "${NOVNC_COMPRESSION}" ]; then
                 echo "noVNC compression set to default"
 	        sed -i "/        UI.initSetting('compression',/c\        UI.initSetting('compression', 2);" /usr/share/novnc/app/ui.js
         fi
-elif [ -z "${NOVNC_QUALITY##[0-9]}" ]; then
+elif [ -z "${NOVNC_COMPRESSION##[0-9]}" ]; then
         echo "Setting noVNC compression to: ${NOVNC_COMPRESSION}"
         sed -i "/        UI.initSetting('compression',/c\        UI.initSetting('compression', ${NOVNC_COMPRESSION});" /usr/share/novnc/app/ui.js
 else
