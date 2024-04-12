@@ -45,3 +45,11 @@ else
         sed -i "/        UI.initSetting('compression',/c\        UI.initSetting('compression', 2);" /usr/share/novnc/app/ui.js
 fi
 
+if [ ! -z "${NOVNC_TITLE}" ]; then
+        if [[ ${NOVNC_TITLE} =~ ^[A-Za-z0-9._-]+$ ]]; then
+                echo "Setting noVNC Title to: ${NOVNC_TITLE}"
+                sed -i '/    document.title =/c\    document.title = "${NOVNC_TITLE}";' /usr/share/novnc/app/ui.js
+        else
+                echo "NOVNC_TITLE can only consist of alphanumeric, numeric and . _ -"
+        fi
+fi
