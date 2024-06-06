@@ -31,7 +31,7 @@ RUN apt-get update && \
 	rm -rf /var/lib/apt/lists/*
 
 RUN cd /tmp && \
-	wget -O /tmp/turbovnc.deb https://sourceforge.net/projects/turbovnc/files/${TURBOVNC_V}/turbovnc_${TURBOVNC_V}_amd64.deb/download && \
+	wget -O /tmp/turbovnc.deb https://github.com/TurboVNC/turbovnc/releases/download/${TURBOVNC_V}/turbovnc_${TURBOVNC_V}_amd64.deb && \
 	dpkg -i /tmp/turbovnc.deb && \
 	rm -rf /opt/TurboVNC/java /opt/TurboVNC/README.txt && \
 	cp -R /opt/TurboVNC/bin/* /bin/ && \
