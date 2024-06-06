@@ -27,8 +27,7 @@ RUN cd /tmp && \
 
 RUN apt-get update && \
 	apt-get -y install --no-install-recommends xvfb wmctrl x11vnc websockify fluxbox screen libxcomposite-dev libxcursor1 xauth && \
-	sed -i '/    document.title =/c\    document.title = "noVNC";' /usr/share/novnc/app/ui.js && \
-	rm -rf /var/lib/apt/lists/*
+	sed -i '/    document.title =/c\    document.title = "noVNC";' /usr/share/novnc/app/ui.js
 
 RUN cd /tmp && \
 	wget -O /tmp/turbovnc.deb https://github.com/TurboVNC/turbovnc/releases/download/${TURBOVNC_V}/turbovnc_${TURBOVNC_V}_amd64.deb && \
@@ -36,7 +35,8 @@ RUN cd /tmp && \
 	rm -rf /opt/TurboVNC/java /opt/TurboVNC/README.txt && \
 	cp -R /opt/TurboVNC/bin/* /bin/ && \
 	rm -rf /opt/TurboVNC /tmp/turbovnc.deb && \
-	sed -i '/# $enableHTTP = 1;/c\$enableHTTP = 0;' /etc/turbovncserver.conf
+	sed -i '/# $enableHTTP = 1;/c\$enableHTTP = 0;' /etc/turbovncserver.conf && \
+	rm -rf /var/lib/apt/lists/*
 
 ENV CUSTOM_RES_W=640
 ENV CUSTOM_RES_H=480
