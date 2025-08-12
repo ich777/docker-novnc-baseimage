@@ -3,8 +3,8 @@ FROM ich777/debian-baseimage
 LABEL org.opencontainers.image.authors="admin@minenet.at"
 LABEL org.opencontainers.image.source="https://github.com/ich777/docker-novnc-baseimage"
 
-ARG NOVNC_V=1.5.0
-ARG TURBOVNC_V=3.1.3
+ARG NOVNC_V=1.6.0
+ARG TURBOVNC_V=3.2
 
 COPY novnccheck /usr/bin
 RUN chmod 755 /usr/bin/novnccheck
